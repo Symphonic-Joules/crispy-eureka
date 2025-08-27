@@ -1,0 +1,61 @@
+{
+  "annotations": {
+    "title": "Create sub-issue",
+    "readOnlyHint": false
+  },
+  "description": "Create a new issue and automatically add it as a sub-issue to a parent issue in a GitHub repository.",
+  "inputSchema": {
+    "properties": {
+      "assignees": {
+        "description": "Usernames to assign to this issue",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "body": {
+        "description": "Issue body content",
+        "type": "string"
+      },
+      "labels": {
+        "description": "Labels to apply to this issue",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "milestone": {
+        "description": "Milestone number",
+        "type": "number"
+      },
+      "owner": {
+        "description": "Repository owner",
+        "type": "string"
+      },
+      "parent_issue_number": {
+        "description": "The number of the parent issue",
+        "type": "number"
+      },
+      "repo": {
+        "description": "Repository name",
+        "type": "string"
+      },
+      "title": {
+        "description": "Issue title",
+        "type": "string"
+      },
+      "type": {
+        "description": "Type of this issue",
+        "type": "string"
+      }
+    },
+    "required": [
+      "owner",
+      "repo",
+      "parent_issue_number",
+      "title"
+    ],
+    "type": "object"
+  },
+  "name": "create_sub_issue"
+}
