@@ -333,7 +333,7 @@ func TestIssueToFixWorkflowPrompt(t *testing.T) {
 		// Then messages should form a coherent conversation
 		require.NoError(t, err)
 		assert.Greater(t, len(result.Messages), 0)
-		
+
 		// First message should set context
 		firstMsg := result.Messages[0]
 		assert.Equal(t, "user", firstMsg.Role)
@@ -408,7 +408,7 @@ func TestIssueToFixWorkflowPrompt(t *testing.T) {
 				allContent += textContent.Text
 			}
 		}
-		
+
 		// Should mention key workflow steps
 		assert.Contains(t, allContent, "issue")
 		assert.Contains(t, allContent, "Copilot")

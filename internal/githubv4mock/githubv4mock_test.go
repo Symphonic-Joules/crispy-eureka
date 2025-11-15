@@ -119,10 +119,11 @@ func TestNewMutationMatcher(t *testing.T) {
 		// Given a mutation without input in variables
 		mutation := "mutation { test }"
 		input := map[string]any{"field": "value"}
+		variables := map[string]any{}
 		response := DataResponse(map[string]any{})
 
-		// When we create a matcher with nil variables
-		matcher := NewMutationMatcher(mutation, input, nil, response)
+		// When we create a matcher
+		matcher := NewMutationMatcher(mutation, input, variables, response)
 
 		// Then input should be added to variables
 		assert.NotNil(t, matcher.Variables)
@@ -136,7 +137,7 @@ func TestNewMutationMatcher(t *testing.T) {
 			Body  string `json:"body"`
 		}
 		input := Input{Title: "Test", Body: "Body"}
-		
+
 		type Mutation struct {
 			CreateIssue struct {
 				Issue struct {
@@ -481,7 +482,7 @@ func TestMatcherIntegration(t *testing.T) {
 				Name string
 			} `graphql:"repository(owner: $owner, name: $name)"`
 		}
-		
+
 		query := Query{}
 		variables := map[string]any{
 			"owner": githubv4.String("testowner"),
@@ -511,12 +512,12 @@ func TestMatcherIntegration(t *testing.T) {
 				}
 			} `graphql:"createIssue(input: $input)"`
 		}
-		
+
 		type Input struct {
 			RepositoryID githubv4.ID     `json:"repositoryId"`
 			Title        githubv4.String `json:"title"`
 		}
-		
+
 		mutation := Mutation{}
 		input := Input{
 			RepositoryID: githubv4.ID("repo123"),
