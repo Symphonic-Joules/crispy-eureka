@@ -32,16 +32,16 @@ func TestIssueToFixWorkflowPrompt(t *testing.T) {
 		tool, _ := IssueToFixWorkflowPrompt(translator)
 
 		// Then it should have the required arguments
-		assert.Contains(t, tool.InputSchema.Properties, "owner")
-		assert.Contains(t, tool.InputSchema.Properties, "repo")
-		assert.Contains(t, tool.InputSchema.Properties, "title")
-		assert.Contains(t, tool.InputSchema.Properties, "description")
+		assert.Contains(t, tool.Input.Properties, "owner")
+		assert.Contains(t, tool.Input.Properties, "repo")
+		assert.Contains(t, tool.Input.Properties, "title")
+		assert.Contains(t, tool.Input.Properties, "description")
 
 		// And required arguments should be marked as such
-		assert.Contains(t, tool.InputSchema.Required, "owner")
-		assert.Contains(t, tool.InputSchema.Required, "repo")
-		assert.Contains(t, tool.InputSchema.Required, "title")
-		assert.Contains(t, tool.InputSchema.Required, "description")
+		assert.Contains(t, tool.Input.Required, "owner")
+		assert.Contains(t, tool.Input.Required, "repo")
+		assert.Contains(t, tool.Input.Required, "title")
+		assert.Contains(t, tool.Input.Required, "description")
 	})
 
 	t.Run("prompt has optional arguments", func(t *testing.T) {
@@ -52,12 +52,12 @@ func TestIssueToFixWorkflowPrompt(t *testing.T) {
 		tool, _ := IssueToFixWorkflowPrompt(translator)
 
 		// Then it should have optional arguments
-		assert.Contains(t, tool.InputSchema.Properties, "labels")
-		assert.Contains(t, tool.InputSchema.Properties, "assignees")
+		assert.Contains(t, tool.Input.Properties, "labels")
+		assert.Contains(t, tool.Input.Properties, "assignees")
 
 		// And they should not be in the required list
-		assert.NotContains(t, tool.InputSchema.Required, "labels")
-		assert.NotContains(t, tool.InputSchema.Required, "assignees")
+		assert.NotContains(t, tool.Input.Required, "labels")
+		assert.NotContains(t, tool.Input.Required, "assignees")
 	})
 
 	t.Run("handler returns messages with required arguments only", func(t *testing.T) {
